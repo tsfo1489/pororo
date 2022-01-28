@@ -243,7 +243,7 @@ class PororoSentTokenizer(PororoTokenizerBase):
         if self.lang in ["zh", "ja"]:
             return self.cj_tokenize(text)
         elif self.lang == "ko":
-            return split_sentences(text)
+            return [text]
         return self._model(text)
 
 
