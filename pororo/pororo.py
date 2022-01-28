@@ -185,6 +185,7 @@ class Pororo:
         task: str,
         lang: str = "en",
         model: Optional[str] = None,
+        device=torch.device("cuda" if torch.cuda.is_available() else "cpu"),
         **kwargs,
     ) -> PororoTaskBase:
         if task not in SUPPORTED_TASKS:
@@ -195,9 +196,6 @@ class Pororo:
 
         lang = lang.lower()
         lang = LANG_ALIASES[lang] if lang in LANG_ALIASES else lang
-
-        # Get device information from torch API
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         # Instantiate task-specific pipeline module, if possible
         task_module = SUPPORTED_TASKS[task](
